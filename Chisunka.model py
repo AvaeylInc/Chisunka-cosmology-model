@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define parameters for the Chisunka Equation of State
+# w_Z(rho_Z) = -1 + w1 / (1 + exp(-k * (rho_Z - rho_c)))
+
+rho_c = 5.0      # Critical density threshold
+w1 = 1.0         # Amplitude parameter
+k = 2.0          # Transition sharpness parameter
+
+# Create a range of energy densities (rho_Z) spanning from low to high density
+rho_Z = np.linspace(0, 15, 300)
+
+# Calculate the equation of state parameter w_Z
+w_Z = -1.0 + w1 / (1.0 + np.exp(-k * (rho_Z - rho_c)))
+
+# Generate the plot
+plt.figure(figsize=(8, 5))
+plt.plot(rho_Z, w_Z, label=r'$w_Z(\rho_Z)$ (Chisunka EoS)', color='purple', linewidth=2)
+plt.axhline(y=-1, color='gray', linestyle='--', label='Cosmological Constant Limit ($w = -1$)')
+plt.axvline(x=rho_c, color='red', linestyle=':', label=r'Critical Density ($\rho_c$)')
+
+# Formatting the plot
+plt.title('Chisunka Field Equation of State: Dual-Phase Regime', fontsize=12)
+plt.xlabel(r'Zviraen Energy Density ($\rho_Z$)', fontsize=10)
+plt.ylabel(r'Equation of State Parameter ($w_Z$)', fontsize=10)
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.legend(loc='best')
+plt.tight_layout()
+
+# Save the figure (you can view or upload this image to your repository)
+plt.savefig('chisunka_eos_plot.png', dpi=300)
+plt.show()
